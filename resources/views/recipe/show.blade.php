@@ -7,5 +7,6 @@
 @section('content')
 
     <h1> {{$recipe->name}} </h1> 
+    <p> {{ $recipe->step }} </p>
 
 @endsection

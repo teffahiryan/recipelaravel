@@ -22,6 +22,9 @@
                 <a @class(['nav-link', 'active' => request()->route()->getName() === 'recipe.index']) aria-current="page" href="{{route('recipe.index')}}"> Recettes </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="{{ route('recipe.create') }}">Créer sa recette</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="#">Test</a>
               </li>
             </ul>
@@ -31,7 +34,14 @@
 
     <div class="container mt-5">
 
-        @yield('content')
+      {{-- Ici on récupère la variable SESSION 'success' et on affiche l'alerte si elle existe --}}
+      @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+      @endif
+
+      @yield('content')
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
