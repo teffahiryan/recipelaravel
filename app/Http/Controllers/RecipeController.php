@@ -24,7 +24,7 @@ class RecipeController extends Controller
             'recipes' => $recipes
         ]);
     }
-
+ 
     // Fonction SHOW avec comme paramètre le slug et l'objet RECIPE donné directement à la place de l'ID
     public function show(string $slug, Recipe $recipe): RedirectResponse | View {
 

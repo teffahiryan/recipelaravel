@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecipeController;
 
@@ -47,5 +48,13 @@ Route::prefix('/recette')->name('recipe.')->controller(RecipeController::class)-
 
 });
 
+Route::prefix('/categorie')->name('category.')->controller(CategoryController::class)->group(function(){
+
+    Route::get('/', 'index')->name('index');
+
+    Route::get('/new', 'create')->name('create');
+    Route::post('/new', 'store');
+
+});
 
 
