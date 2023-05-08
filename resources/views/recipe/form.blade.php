@@ -26,6 +26,17 @@
             {{ $message }}
         @enderror
     </div>
+    <div>
+        <label for="category">Choix de la catégorie</label>
+        <select name="category">
+            @foreach ($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+        </select>
+        @error('category')
+            {{ $message }}
+        @enderror
+    </div>
     <button class="btn btn-primary"> 
         {{-- Si la recette contient un ID ça veut dire qu'on modifie sinon on créer --}}
         @if($recipe->id)

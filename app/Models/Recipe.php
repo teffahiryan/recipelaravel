@@ -14,4 +14,10 @@ class Recipe extends Model
         'slug',
         'step'
     ];
+
+    // Cette fonction permet de dire que cet article est associé a une catégorie
+    public function category () {
+        // belongsTo = Appartient à, la relation se fait donc encore ici
+        return $this->belongsTo(Category::class);
+    }
 }

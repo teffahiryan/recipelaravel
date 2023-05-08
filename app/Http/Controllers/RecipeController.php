@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FormRecipeRequest;
 use App\Models\Recipe;
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -46,10 +47,12 @@ class RecipeController extends Controller
     public function create() {
         // On créer un nouvel objet RECIPE vide pour ne pas avoir de soucis avec le form.blade.php (valeur par défaut insérer de l'objet recipe en cas de EDIT - voir le fichier)
         $recipe = new Recipe();
+        $categories = Category::all();
 
         return view('recipe.create', [
             // On lui retourne l'objet vide
-            'recipe' => $recipe
+            'recipe' => $recipe,
+            'categories' => $categories
         ]);
 
     }
@@ -59,6 +62,8 @@ class RecipeController extends Controller
         
         // On créer et on store cette objet s'il est validé par un fichier Request (app->requets->formreciperequest.php) qui se créer à l'aide de la commande "php artisan make:request NomDeLaRequest"
         $recipe = Recipe::create($request->validated());
+        $recipe->category()->associate($request->category);
+        $recipe->save();
 
         // Une fois l'objet sauvegardé on retourne vers une route, ici vers le show, on lui passe à l'aide du with une variable SESSION pour afficher un message de succès -> voir le fichier blade base
         return redirect()->route('recipe.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id])->with('success', "L'article a bien été sauvegardé");
@@ -68,8 +73,11 @@ class RecipeController extends Controller
     // Ici l'objet recipe va servir a remplir les inputs dans le formulaire
     public function edit(Recipe $recipe) {
 
+        $categories = Category::all();
+
         return view('recipe.edit', [
-            'recipe' => $recipe
+            'recipe' => $recipe,
+            'categories' => $categories
         ]);
 
     }
@@ -77,6 +85,8 @@ class RecipeController extends Controller
     public function update(Recipe $recipe, FormRecipeRequest $request){
 
         $recipe->update($request->validated());
+        $recipe->category()->associate($request->category);
+        $recipe->save();
 
         return redirect()->route('recipe.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id])->with('success', "L'article a bien été modifié");
 
