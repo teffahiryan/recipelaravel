@@ -62,8 +62,6 @@ class RecipeController extends Controller
         
         // On créer et on store cette objet s'il est validé par un fichier Request (app->requets->formreciperequest.php) qui se créer à l'aide de la commande "php artisan make:request NomDeLaRequest"
         $recipe = Recipe::create($request->validated());
-        $recipe->category()->associate($request->category);
-        $recipe->save();
 
         // Une fois l'objet sauvegardé on retourne vers une route, ici vers le show, on lui passe à l'aide du with une variable SESSION pour afficher un message de succès -> voir le fichier blade base
         return redirect()->route('recipe.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id])->with('success', "L'article a bien été sauvegardé");
@@ -85,8 +83,6 @@ class RecipeController extends Controller
     public function update(Recipe $recipe, FormRecipeRequest $request){
 
         $recipe->update($request->validated());
-        $recipe->category()->associate($request->category);
-        $recipe->save();
 
         return redirect()->route('recipe.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id])->with('success', "L'article a bien été modifié");
 

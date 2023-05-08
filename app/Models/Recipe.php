@@ -12,7 +12,8 @@ class Recipe extends Model
     protected $fillable = [
         'name',
         'slug',
-        'step'
+        'step',
+        'category_id'
     ];
 
     // Cette fonction permet de dire que cet article est associé a une catégorie

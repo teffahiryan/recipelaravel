@@ -31,7 +31,7 @@ class FormRecipeRequest extends FormRequest
             // Règle :  *, Regex qui autorise les lettres, nombres et tirets plusieurs fois, REVOIR LA REGLE UNIQUE -> Grafikart - Laravel 10 les formulaires
             'slug' => ['required', 'min:8', 'regex:/^[0-9a-z\-]+$/', Rule::unique('recipes')->ignore($this->route()->parameter('recipe'))],
             'step' => ['required'],
-            'category' => ['required']
+            'category_id' => ['required', 'exists:categories,id']
         ];
     }
 

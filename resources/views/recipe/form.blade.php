@@ -2,7 +2,7 @@
 <form action="" method="post">
     {{-- Token laravel à préciser dans tout les formulaires pour le valider et éviter certaines failles --}}
     @csrf
-    <div>
+    <div class="form-group">
         <label for="name">Nom de la recette</label>
         {{-- Le old permet en cas d'erreur d'afficher la dernière valeur saisie, 
         en cas de création d'un objet il n'y aura pas d'ancienne valeur donc on lui passe en default la valeur de l'objet --}}
@@ -12,28 +12,29 @@
             {{ $message }}
         @enderror
     </div>
-    <div>
+    <div class="form-group">
         <label for="slug">Slug</label>
         <input type="text" name="slug" value="{{ old('slug', $recipe->slug) }}">
         @error('slug')
             {{ $message }}
         @enderror
     </div>
-    <div>
+    <div class="form-group">
         <label for="step">Les étapes de préparation</label>
         <textarea name="step">{{ old('step', $recipe->step) }}</textarea>
         @error('step')
             {{ $message }}
         @enderror
     </div>
-    <div>
+    <div class="form-group">
         <label for="category">Choix de la catégorie</label>
-        <select name="category">
+        <select class="form-control" id="category" name="category_id">
+            <option value=""> Sélectionner une catégorie </option>
             @foreach ($categories as $category)
-                <option value="{{$category->id}}">{{$category->name}}</option>
+                <option @selected(old('category_id', $recipe->category_id) == $category->id) value="{{ $category->id }}">{{ $category->name }}</option>
             @endforeach
         </select>
-        @error('category')
+        @error('category_id')
             {{ $message }}
         @enderror
     </div>
