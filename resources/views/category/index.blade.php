@@ -9,5 +9,6 @@
             <li class="list-group-item"> {{$category->name}} </li>
         @endforeach
     </ul>
+    <a href="{{route('category.create')}}" class="btn btn-primary mt-2"> Créer </a>
     
 @endsection

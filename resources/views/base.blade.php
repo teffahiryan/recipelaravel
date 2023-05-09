@@ -28,6 +28,26 @@
                 <a class="nav-link" href="#">Test</a>
               </li>
             </ul>
+
+            <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+              {{-- @auth permet de vérifier si l'utilisateur est connecté --}}
+              @auth
+                {{ \Illuminate\Support\Facades\Auth::user()->name }}
+                {{-- Méthode conseillé pour le bouton logout via formulaire --}}
+                <form class="nav-item" action="{{route('auth.logout')}}" method="post">
+                  {{-- simulation de méthode delete voir le fichier web route --}}
+                  @method("delete")
+                  @csrf
+                  <button class="nav-link"> Se déconnecter </button>
+                </form>
+              @endauth
+
+              {{-- S'il n'est pas connecté alors il est un invité @guest qu'on invite a se connecter --}}
+              @guest
+                <a href="{{route('auth.login')}}"> Se connecter </a>
+              @endguest
+            </div>
+
           </div>
         </div>
     </nav>

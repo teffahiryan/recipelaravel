@@ -21,4 +21,8 @@ class Recipe extends Model
         // belongsTo = Appartient à, la relation se fait donc encore ici
         return $this->belongsTo(Category::class);
     }
+
+    public function ingredients () {
+        return $this->belongsToMany(Ingredient::class);
+    }
 }

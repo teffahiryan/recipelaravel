@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FormRecipeRequest;
+use App\Models\User;
 use App\Models\Recipe;
 use App\Models\Category;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\FormRecipeRequest;
 
 
 class RecipeController extends Controller
@@ -18,6 +20,12 @@ class RecipeController extends Controller
 
         // je récupère TOUT les objets Recipe
         $recipes = Recipe::all();
+
+        // User::create([
+        //     'name' => 'John',
+        //     'email' => 'john@doe.fr',
+        //     'password' => Hash::make('0000')
+        // ]);
 
         // retour de la vue INDEX situé dans le dossier RECIPE
         return view('recipe.index', [

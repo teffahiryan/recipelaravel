@@ -38,7 +38,13 @@
             {{ $message }}
         @enderror
     </div>
-    <button class="btn btn-primary"> 
+    <hr>
+    <h2> Liste des ingrédients : </h2>
+        <label>
+            
+        </label>
+    <hr>
+    <button class="btn btn-primary mt-2"> 
         {{-- Si la recette contient un ID ça veut dire qu'on modifie sinon on créer --}}
         @if($recipe->id)
             Modifier
