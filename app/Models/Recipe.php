@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Recipe extends Model
 {
@@ -13,7 +14,8 @@ class Recipe extends Model
         'name',
         'slug',
         'step',
-        'category_id'
+        'category_id',
+        'image'
     ];
 
     // Cette fonction permet de dire que cet article est associé a une catégorie
@@ -24,5 +26,9 @@ class Recipe extends Model
 
     public function ingredients () {
         return $this->belongsToMany(Ingredient::class);
+    }
+
+    public function imageUrl (): string {
+        return Storage::url($this->image);
     }
 }

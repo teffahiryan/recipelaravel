@@ -91,6 +91,13 @@ class RecipeController extends Controller
     public function update(Recipe $recipe, FormRecipeRequest $request){
 
         $recipe->update($request->validated());
+        // Ne pas oublier le lien symbolique "php artisan storage:link"
+        /** @var UploadedFile|null $image */
+        $image = $request->validated('image');
+        if ($image != null && !$image->getError()){
+            $data['image'] = $image->store('recipe', 'public');
+        }
+        $recipe->update($data);
 
         return redirect()->route('recipe.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id])->with('success', "L'article a bien été modifié");
 

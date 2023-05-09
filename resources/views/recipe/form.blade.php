@@ -1,5 +1,6 @@
 {{-- Ici on a créé un formulaire qu'on include dans les vues create et edit pour éviter le DRY --}}
-<form action="" method="post">
+{{-- L'enctypes sert à ce que le fichier soit bien géré --}}
+<form action="" method="post" enctype="multipart/form-data">
     {{-- Token laravel à préciser dans tout les formulaires pour le valider et éviter certaines failles --}}
     @csrf
     <div class="form-group">
@@ -38,12 +39,19 @@
             {{ $message }}
         @enderror
     </div>
+
     <hr>
     <h2> Liste des ingrédients : </h2>
-        <label>
-            
-        </label>
     <hr>
+
+    <div class="form-group">
+        <label for="image">Image</label>
+        <input type="file" name="image" id="image">
+        @error('image')
+            {{ $message }}
+        @enderror
+    </div>
+
     <button class="btn btn-primary mt-2"> 
         {{-- Si la recette contient un ID ça veut dire qu'on modifie sinon on créer --}}
         @if($recipe->id)

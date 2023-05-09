@@ -11,6 +11,9 @@
     @foreach ($recipes as $recipe)
         <article>
             <h2> {{$recipe->name}} </h2>
+            @if ($recipe->image)
+                <img src="{{$recipe->imageUrl()}}" alt=""> 
+            @endif
             <a href="{{ route('recipe.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id]) }}" class="btn btn-primary"> Accéder à la recette </a>
         </article>
     @endforeach
