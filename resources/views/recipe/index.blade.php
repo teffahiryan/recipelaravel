@@ -6,8 +6,6 @@
 
     <h1> Mes recettes </h1>
 
-    @dump($recipes)
-
     @foreach ($recipes as $recipe)
         <article>
             <h2> {{$recipe->name}} </h2>

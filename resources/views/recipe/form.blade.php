@@ -3,32 +3,32 @@
 <form action="" method="post" enctype="multipart/form-data">
     {{-- Token laravel à préciser dans tout les formulaires pour le valider et éviter certaines failles --}}
     @csrf
-    <div class="form-group">
-        <label for="name">Nom de la recette</label>
+    <div class="mb-3">
+        <label class="form-label" for="name">Nom de la recette</label>
         {{-- Le old permet en cas d'erreur d'afficher la dernière valeur saisie, 
         en cas de création d'un objet il n'y aura pas d'ancienne valeur donc on lui passe en default la valeur de l'objet --}}
-        <input type="text" name="name" value="{{ old('title', $recipe->name) }}">
+        <input type="text" class="form-control" name="name" value="{{ old('title', $recipe->name) }}">
         {{-- Création d'un message d'erreur si l'input n'est pas rempli correctement --}}
         @error('name')
             {{ $message }}
         @enderror
     </div>
-    <div class="form-group">
-        <label for="slug">Slug</label>
-        <input type="text" name="slug" value="{{ old('slug', $recipe->slug) }}">
+    <div class="mb-3">
+        <label class="form-label" for="slug">Slug</label>
+        <input type="text" class="form-control" name="slug" value="{{ old('slug', $recipe->slug) }}">
         @error('slug')
             {{ $message }}
         @enderror
     </div>
-    <div class="form-group">
-        <label for="step">Les étapes de préparation</label>
-        <textarea name="step">{{ old('step', $recipe->step) }}</textarea>
+    <div class="mb-3">
+        <label class="form-label" for="step">Les étapes de préparation</label>
+        <textarea name="step" class="form-control" >{{ old('step', $recipe->step) }}</textarea>
         @error('step')
             {{ $message }}
         @enderror
     </div>
-    <div class="form-group">
-        <label for="category">Choix de la catégorie</label>
+    <div class="mb-3">
+        <label class="form-label" for="category">Choix de la catégorie</label>
         <select class="form-control" id="category" name="category_id">
             <option value=""> Sélectionner une catégorie </option>
             @foreach ($categories as $category)
@@ -44,9 +44,9 @@
     <h2> Liste des ingrédients : </h2>
     <hr>
 
-    <div class="form-group">
-        <label for="image">Image</label>
-        <input type="file" name="image" id="image">
+    <div class="mb-3">
+        <label class="form-label" for="image">Image</label>
+        <input type="file" class="form-control" name="image" id="image">
         @error('image')
             {{ $message }}
         @enderror

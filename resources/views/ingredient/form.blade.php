@@ -1,17 +1,17 @@
 <form action="" method="post">
     @csrf
-    <div>
-        <label for="name">Nom de l'ingrédient</label>
-        <input type="text" name="name">
+    <div class="mb-3">
+        <label for="name" class="form-label">Nom de l'ingrédient</label>
+        <input type="text" class="form-control" name="name">
 
         @error('name')
             {{ $message }}
         @enderror
     </div>
 
-    <div>
-        <label for="img">Image de l'ingrédient</label>
-        <input type="text" name="img">
+    <div class="mb-3">
+        <label for="img" class="form-label">Image de l'ingrédient</label>
+        <input type="text" class="form-control" name="img">
 
         @error('img')
             {{ $message }}
