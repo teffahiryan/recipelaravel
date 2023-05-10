@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,7 @@ use App\Http\Controllers\IngredientController;
 */
 
 // Route GET, retournant la vue INDEX dans la racine du dossier VIEWS
-Route::get('/', function () {
-    return view('index');
-    // Nommage de la route pour simplifier le path dans les balises A
-})->name('index');
+Route::get('/', [\App\Http\Controllers\MainController::class, 'index'])->name('index');
 
 Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('auth.login');
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'doLogin']);
