@@ -52,12 +52,15 @@
         @enderror
     </div>
 
-    <button class="btn btn-primary mt-2"> 
-        {{-- Si la recette contient un ID ça veut dire qu'on modifie sinon on créer --}}
-        @if($recipe->id)
-            Modifier
-        @else
-            Créer
-        @endif
-    </button>
+    <div class="mt-2">
+        <button class="btn btn-primary"> 
+            {{-- Si la recette contient un ID ça veut dire qu'on modifie sinon on créer --}}
+            @if($recipe->id)
+                Modifier
+            @else
+                Créer
+            @endif
+        </button>
+        <a href="{{route('recipe.index')}}" class="btn btn-primary"> Retour </a>
+    </div>
 </form>

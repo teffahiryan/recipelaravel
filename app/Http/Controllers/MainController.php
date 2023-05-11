@@ -12,9 +12,23 @@ class MainController extends Controller
 
         $categories = Category::all();
 
-        return view('index', [
+        return view('main.index', [
             'categories' => $categories
         ]);
 
     }
+
+    public function show(): View {
+
+        return view('main.show');
+
+    }
+
+    public function page(): View {
+
+        return view('main.page');
+
+    }
+
+
 }
