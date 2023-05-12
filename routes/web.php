@@ -70,10 +70,15 @@ use App\Http\Controllers\MainController;
 
         Route::get('/', 'index')->name('index');
 
+        Route::get('/{category}/show', 'show')->name('show');
+
         Route::get('/new', 'create')->name('create');
         Route::post('/new', 'store');
 
-    });
+        Route::get('/{category}/edit', 'edit')->name('edit');
+        Route::post('/{category}/edit', 'update');
+
+    }); 
 
 
 // ** INGREDIENT **********************************************************************************************************************************************************************
@@ -82,7 +87,12 @@ use App\Http\Controllers\MainController;
 
         Route::get('/', 'index')->name('index');
 
+        Route::get('/{ingredient}/show', 'show')->name('show');
+
         Route::get('/new', 'create')->name('create');
         Route::post('/new', 'store');
+
+        Route::get('/{ingredient}/edit', 'edit')->name('edit');
+        Route::post('/{ingredient}/edit', 'update');
 
     });

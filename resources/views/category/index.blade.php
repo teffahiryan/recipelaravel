@@ -11,8 +11,8 @@
             <li class="list-group-item d-flex justify-content-between align-items-center"> 
                 <div> {{$category->name}} </div>
                 <div>
-                    <a href="#" class="btn btn-primary"> Voir </a>
-                    <a href="#" class="btn btn-primary"> Modifier </a>
+                    <a href="{{route('category.show', ['category' => $category->id])}}" class="btn btn-primary"> Voir </a>
+                    <a href="{{route('category.edit', ['category' => $category->id])}}" class="btn btn-primary"> Modifier </a>
                     <a href="#" class="btn btn-danger"> Supprimer </a>
                 </div>
             </li>

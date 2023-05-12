@@ -7,7 +7,7 @@
         <label class="form-label" for="name">Nom de la recette</label>
         {{-- Le old permet en cas d'erreur d'afficher la dernière valeur saisie, 
         en cas de création d'un objet il n'y aura pas d'ancienne valeur donc on lui passe en default la valeur de l'objet --}}
-        <input type="text" class="form-control" name="name" value="{{ old('title', $recipe->name) }}">
+        <input type="text" class="form-control" name="name" value="{{ old('name', $recipe->name) }}">
         {{-- Création d'un message d'erreur si l'input n'est pas rempli correctement --}}
         @error('name')
             {{ $message }}

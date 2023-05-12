@@ -20,9 +20,21 @@ class CategoryController extends Controller
 
     }
 
+    public function show(Category $category): View {
+
+        return view('category.show', [
+            'category' => $category
+        ]);
+
+    }
+
     public function create() {
+
+        $category = new Category();
         
-        return view('category.create');
+        return view('category.create', [
+            'category' => $category
+        ]);
     }
     
     public function store(FormCategorieRequest $request) {
@@ -30,6 +42,22 @@ class CategoryController extends Controller
         $category = Category::create($request->validated());
 
         return redirect()->route('category.index')->with('success', "La catégorie a été créé avec succès");
+
+    }
+
+    public function edit(Category $category) {
+
+        return view('category.edit', [
+            'category' => $category
+        ]);
+
+    }
+
+    public function update(Category $category, FormCategorieRequest $request) {
+
+        $category->update($request->validated());
+
+        return redirect()->route('category.show', ['category' => $category->id])->with('success', "La catégorie a bien été modifié");
 
     }
 

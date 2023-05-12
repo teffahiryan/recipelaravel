@@ -87,7 +87,7 @@ class RecipeController extends Controller
         ]);
 
     }
-
+ 
     public function update(Recipe $recipe, FormRecipeRequest $request){
 
         $recipe->update($request->validated());

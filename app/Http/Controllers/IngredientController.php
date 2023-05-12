@@ -19,6 +19,14 @@ class IngredientController extends Controller
 
     }
 
+    public function show(Ingredient $ingredient) {
+
+        return view('ingredient.show', [
+            'ingredient' => $ingredient
+        ]);
+
+    }
+ 
     public function create() {
         
         return view('ingredient.create');
@@ -31,4 +39,21 @@ class IngredientController extends Controller
         return redirect()->route('ingredient.index')->with('success', "L'ingrédient a été créé avec succès");
 
     }
+
+    public function edit(Ingredient $ingredient) {
+
+        return view('ingredient.edit', [
+            'ingredient' => $ingredient
+        ]);
+        
+    }
+
+    public function update(Ingredient $ingredient, FormIngredientRequest $request) {
+
+        $ingredient->update($request->validated());
+
+        return redirect()->route('ingredient.show', ['ingredient' => $ingredient->id])->with('success', "L'ingrédient a bien été modifié");
+        
+    }
+
 }

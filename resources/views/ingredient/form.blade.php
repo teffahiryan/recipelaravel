@@ -2,7 +2,7 @@
     @csrf
     <div class="mb-3">
         <label for="name" class="form-label">Nom de l'ingrédient</label>
-        <input type="text" class="form-control" name="name">
+        <input type="text" class="form-control" name="name" value="{{ old('name', $ingredient->name) }}">
 
         @error('name')
             {{ $message }}
@@ -11,7 +11,7 @@
 
     <div class="mb-3">
         <label for="img" class="form-label">Image de l'ingrédient</label>
-        <input type="text" class="form-control" name="img">
+        <input type="text" class="form-control" name="img" value="{{ old('img', $ingredient->img) }}">
 
         @error('img')
             {{ $message }}

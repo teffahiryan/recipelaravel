@@ -11,12 +11,12 @@
             <li class="list-group-item d-flex justify-content-between align-items-center"> 
                 <div> {{$ingredient->name}} </div>
                 <div>
-                    <a href="#" class="btn btn-primary"> Voir </a>
-                    <a href="#" class="btn btn-primary"> Modifier </a>
+                    <a href="{{route('ingredient.show', ['ingredient' => $ingredient->id])}}" class="btn btn-primary"> Voir </a>
+                    <a href="{{route('ingredient.edit', ['ingredient' => $ingredient->id])}}" class="btn btn-primary"> Modifier </a>
                     <a href="#" class="btn btn-danger"> Supprimer </a>
                 </div>
             </li>
         @endforeach
     </ul>
-    
+
 @endsection
