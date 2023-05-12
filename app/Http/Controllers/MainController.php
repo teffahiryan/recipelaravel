@@ -21,7 +21,7 @@ class MainController extends Controller
     public function show(): View {
 
         return view('main.show');
-
+ 
     }
 
     public function page(): View {
