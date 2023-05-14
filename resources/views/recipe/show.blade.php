@@ -10,6 +10,7 @@
     <div>
         <p> étapes : {{ $recipe->step }} </p>
         <p> catégorie : {{ $recipe->category->name ?? 'Pas de catégorie' }} </p>
+        <p> Plat du jour : {{ $recipe->dayRecipe ?? 'False'}} </p>
     </div>
 
 

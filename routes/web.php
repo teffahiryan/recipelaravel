@@ -22,8 +22,13 @@ use App\Http\Controllers\MainController;
     // Route GET, retournant la vue INDEX dans la racine du dossier VIEWS
     Route::prefix('/')->name('main.')->controller(MainController::class)->group(function (){
         Route::get('/', 'index')->name('index');
-        Route::get('show', 'show')->name('show');
+        Route::get('/{slug}-{recipe}', 'show')
+        ->where([
+            'recipe' => '[0-9]+',
+            'slug' => '[a-z0-9\-]+'
+        ])->name('show');
         Route::get('page', 'page')->name('page');
+        Route::get('page/{category}', 'page')->name('page.category');
     });
 
 
@@ -61,6 +66,8 @@ use App\Http\Controllers\MainController;
         Route::get('/{recipe}/edit', 'edit')->name('edit');
         Route::post('/{recipe}/edit', 'update');
 
+        Route::delete('/{recipe}/delete', 'delete')->name('delete');
+
     });
 
 
@@ -78,6 +85,7 @@ use App\Http\Controllers\MainController;
         Route::get('/{category}/edit', 'edit')->name('edit');
         Route::post('/{category}/edit', 'update');
 
+        Route::delete('/{category}/delete', 'delete')->name('delete');
     }); 
 
 
@@ -94,5 +102,7 @@ use App\Http\Controllers\MainController;
 
         Route::get('/{ingredient}/edit', 'edit')->name('edit');
         Route::post('/{ingredient}/edit', 'update');
+
+        Route::delete('/{ingredient}/delete', 'delete')->name('delete');
 
     });

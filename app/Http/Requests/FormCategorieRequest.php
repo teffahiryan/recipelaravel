@@ -24,7 +24,8 @@ class FormCategorieRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'min:5', 'regex:/[a-z]+/', Rule::unique('categories')]
+            'name' => ['required', 'min:4', 'regex:/[a-z]+/', Rule::unique('categories')->ignore($this->route()->parameter('category'))],
+            'image' => ['image', 'max:2000']
         ];
     }
 }

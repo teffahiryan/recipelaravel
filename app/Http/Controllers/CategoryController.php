@@ -41,6 +41,13 @@ class CategoryController extends Controller
 
         $category = Category::create($request->validated());
 
+        /** @var UploadedFile|null $image */
+        $image = $request->validated('image');
+        if ($image != null && !$image->getError()){
+            $data['image'] = $image->store('category', 'public');
+            $category->update($data);
+        }
+
         return redirect()->route('category.index')->with('success', "La catégorie a été créé avec succès");
 
     }
@@ -57,8 +64,25 @@ class CategoryController extends Controller
 
         $category->update($request->validated());
 
+        /** @var UploadedFile|null $image */
+        $image = $request->validated('image');
+        if ($image != null && !$image->getError()){
+            $data['image'] = $image->store('category', 'public');
+            $category->update($data);
+        }
+
         return redirect()->route('category.show', ['category' => $category->id])->with('success', "La catégorie a bien été modifié");
 
     }
+
+    
+    public function delete(Category $category){
+
+        $category->delete();
+
+        return redirect()->route('category.index')->with('success', "La catégorie a bien été supprimé");
+
+    }
+
 
 }

@@ -1,19 +1,32 @@
 @extends('base')
 
-@section('title', 'Accueil recette')
+@section('title', 'Accueil | RecipeRT ')
 
 @section('content')
 
-    <div class="container w-50">
+    <div class="card text-bg-light mb-4">
+        <img src="{{$dayRecipe->imageUrl()}}" class="img-fluid w-25" alt="Image recette du jour, {{$dayRecipe->name}}">
+        <div class="card-img-overlay">
+            <div class="card-title"> Plat du jour : {{$dayRecipe->name}} </div>
+            <a href="#" class="card-text btn btn-primary"> Voir la recette </a>
+        </div>
+    </div>
+
+    <div class="container w-50 d-flex flex-column justify-content-center">
         <div class="row">
             @foreach ($categories as $category)
                 <div class="col-2">                        
-                    <a href="#" class="btn btn-primary rounded-circle p-2 d-flex justify-content-center align-items-center" style="width: 75px; height: 75px"> 
-                        <i class="fas fa-hamburger" style="font-size : 2em;"></i> 
+                    <a href="{{route('main.page.category', ['category' => $category->id])}}" class="btn btn-primary rounded-circle p-2 d-flex justify-content-center align-items-center" style="width: 75px; height: 75px"> 
+                        @if ($category->image)
+                            <img src="{{$category->imageUrl()}}" class="w-75" alt="Image de {{$category->name}}"> 
+                        @else
+                            {{$category->name}}
+                        @endif
                     </a>
                 </div>
             @endforeach
         </div>
+        <a href="{{route('main.page')}}" class="btn btn-primary mx-auto mt-4"> Voir toutes les recettes </a>
     </div>
 
 @endsection

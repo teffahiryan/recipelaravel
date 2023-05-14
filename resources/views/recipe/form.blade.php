@@ -52,6 +52,14 @@
         @enderror
     </div>
 
+    <div class="form-check mb-3">
+        <label class="form-check-label" for="dayRecipe">Recette du jour</label>
+        <input type="checkbox" class="form-check-input" name="dayRecipe" id="dayRecipe" value="1">
+        @error('dayRecipe')
+            {{ $message }}
+        @enderror
+    </div>
+
     <div class="mt-2">
         <button class="btn btn-primary"> 
             {{-- Si la recette contient un ID ça veut dire qu'on modifie sinon on créer --}}

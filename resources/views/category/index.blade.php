@@ -9,11 +9,22 @@
     <ul class="list-group"> 
         @foreach ($categories as $category)
             <li class="list-group-item d-flex justify-content-between align-items-center"> 
-                <div> {{$category->name}} </div>
-                <div>
+                <div class="d-flex align-items-center">
+                    @if ($category->image)
+                        <div class="bg-primary p-2 rounded">
+                            <img src="{{$category->imageUrl()}}" alt="Image de {{$category->name}}"> 
+                        </div>
+                    @endif
+                    <p class="ms-2"> {{$category->name}} </p>
+                </div>
+                <div class="d-flex gap-2">
                     <a href="{{route('category.show', ['category' => $category->id])}}" class="btn btn-primary"> Voir </a>
                     <a href="{{route('category.edit', ['category' => $category->id])}}" class="btn btn-primary"> Modifier </a>
-                    <a href="#" class="btn btn-danger"> Supprimer </a>
+                    <form action="{{route('category.delete', ['category' => $category])}}" method="post">
+                        @csrf
+                        @method("delete")
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
                 </div>
             </li>
         @endforeach

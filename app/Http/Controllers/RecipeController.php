@@ -71,8 +71,15 @@ class RecipeController extends Controller
         // On créer et on store cette objet s'il est validé par un fichier Request (app->requets->formreciperequest.php) qui se créer à l'aide de la commande "php artisan make:request NomDeLaRequest"
         $recipe = Recipe::create($request->validated());
 
+        /** @var UploadedFile|null $image */
+        $image = $request->validated('image');
+        if ($image != null && !$image->getError()){
+            $data['image'] = $image->store('recipe', 'public');
+            $recipe->update($data);
+        }
+
         // Une fois l'objet sauvegardé on retourne vers une route, ici vers le show, on lui passe à l'aide du with une variable SESSION pour afficher un message de succès -> voir le fichier blade base
-        return redirect()->route('recipe.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id])->with('success', "L'article a bien été sauvegardé");
+        return redirect()->route('recipe.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id])->with('success', "La recette a bien été sauvegardé");
     }
 
     // Fonction EDIT, le fonctionnement est très similaire au create seulement on va a chaque fois récupérer l'objet Recipe déjà passé dans l'url
@@ -96,10 +103,18 @@ class RecipeController extends Controller
         $image = $request->validated('image');
         if ($image != null && !$image->getError()){
             $data['image'] = $image->store('recipe', 'public');
+            $recipe->update($data);
         }
-        $recipe->update($data);
 
-        return redirect()->route('recipe.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id])->with('success', "L'article a bien été modifié");
+        return redirect()->route('recipe.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id])->with('success', "La recette a bien été modifié");
+
+    }
+
+    public function delete(Recipe $recipe){
+
+        $recipe->delete();
+
+        return redirect()->route('recipe.index')->with('success', "La recette a bien été supprimé");
 
     }
 

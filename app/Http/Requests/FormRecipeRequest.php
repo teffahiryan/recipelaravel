@@ -26,15 +26,16 @@ class FormRecipeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // Règle :  requis, et 8 caractères minimum
-            'name' => ['required', 'min:8'],
+            // Règle :  requis, et 3 caractères minimum
+            'name' => ['required', 'min:3'],
             // Règle :  *, Regex qui autorise les lettres, nombres et tirets plusieurs fois, REVOIR LA REGLE UNIQUE -> Grafikart - Laravel 10 les formulaires
-            'slug' => ['required', 'min:8', 'regex:/^[0-9a-z\-]+$/', Rule::unique('recipes')->ignore($this->route()->parameter('recipe'))],
+            'slug' => ['required', 'min:3', 'regex:/^[0-9a-z\-]+$/', Rule::unique('recipes')->ignore($this->route()->parameter('recipe'))],
             'step' => ['required'],
             'category_id' => ['required', 'exists:categories,id'],
             // Max 2Mo
-            'image' => ['image', 'max:2000']
-        ];
+            'image' => ['image', 'max:2000'],
+            'dayRecipe' => []
+        ]; 
     }
 
     // Préparation des données avant la validation au dessus

@@ -13,14 +13,18 @@
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     @if ($recipe->image)
-                        <img w-25 src="{{$recipe->imageUrl()}}" alt=""> 
+                        <img src="{{$recipe->imageUrl()}}" alt=""> 
                     @endif
                     <p class="ms-2"> {{$recipe->name}} </p>
                 </div>
-                <div>
+                <div class="d-flex gap-2">
                     <a href="{{ route('recipe.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id]) }}" class="btn btn-primary"> Voir </a>
                     <a href="{{ route('recipe.edit', ['recipe' => $recipe->id]) }}" class="btn btn-primary"> Modifier </a>
-                    <a href="#" class="btn btn-danger"> Supprimer </a>
+                    <form action="{{route('recipe.delete', ['recipe' => $recipe])}}" method="post">
+                        @csrf
+                        @method("delete")
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
                 </div>
             </li>
         @endforeach
