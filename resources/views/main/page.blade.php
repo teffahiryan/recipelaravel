@@ -39,6 +39,12 @@
       </div>
     @endforeach
 
+    @if ($recipes)
+        <div class="card bg-secondary p-2 w-75 mx-auto">
+            <p class="card-text text-bg-secondary text-center"> Aucune recettes trouvé </p>
+        </div>
+    @endif
+
     {{ $recipes->links('pagination::simple-bootstrap-5') }}
 
 @endsection

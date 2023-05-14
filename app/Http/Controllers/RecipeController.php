@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Recipe;
 use App\Models\Category;
 use Illuminate\View\View;
+use App\Models\Ingredient;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -87,17 +88,27 @@ class RecipeController extends Controller
     public function edit(Recipe $recipe) {
 
         $categories = Category::all();
+        $ingredients = Ingredient::all();
 
         return view('recipe.edit', [
             'recipe' => $recipe,
-            'categories' => $categories
+            'categories' => $categories,
+            'ingredients' => $ingredients
         ]);
 
     }
  
     public function update(Recipe $recipe, FormRecipeRequest $request){
 
+        $ingredients = [];
+
+        for($i = 0; $i <= count($request->ingredients) - 1 ; $i++){
+            array_push($ingredients, ['ingredient_id' => $request->ingredients[$i], 'quantity' => $request->quantity[$i], 'unit' => $request->unit[$i]]);
+        }
+
         $recipe->update($request->validated());
+        $recipe->ingredients()->sync($ingredients);        
+
         // Ne pas oublier le lien symbolique "php artisan storage:link"
         /** @var UploadedFile|null $image */
         $image = $request->validated('image');

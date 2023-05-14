@@ -4,11 +4,11 @@
 
 @section('content')
 
-    <div class="card text-bg-light mb-4">
-        <img src="{{$dayRecipe->imageUrl()}}" class="img-fluid w-25" alt="Image recette du jour, {{$dayRecipe->name}}">
+    <div class="card w-50 text-bg-light mb-4 mx-auto">
+        <img src="{{$dayRecipe->imageUrl()}}" class="img-fluid w-50 mx-auto" alt="Image recette du jour, {{$dayRecipe->name}}">
         <div class="card-img-overlay">
             <div class="card-title"> Plat du jour : {{$dayRecipe->name}} </div>
-            <a href="#" class="card-text btn btn-primary"> Voir la recette </a>
+            <a href="{{route('main.show', ['slug' => $dayRecipe->slug,'recipe' => $dayRecipe->id])}}" class="card-text btn btn-primary"> Voir la recette </a>
         </div>
     </div>
 

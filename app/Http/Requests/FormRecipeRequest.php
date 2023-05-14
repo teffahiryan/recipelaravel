@@ -34,7 +34,12 @@ class FormRecipeRequest extends FormRequest
             'category_id' => ['required', 'exists:categories,id'],
             // Max 2Mo
             'image' => ['image', 'max:2000'],
-            'dayRecipe' => []
+            'dayRecipe' => [],
+            'ingredients' => ['required', 'array'],
+            'ingredients.quantity' => ['integer'],
+            'ingredients.unit' => ['string']
+            // 'ingredients.quantity' => ['integer'],
+            // 'ingredients.unit' => ['string']
         ]; 
     }
 

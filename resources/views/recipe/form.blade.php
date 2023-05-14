@@ -27,6 +27,9 @@
             {{ $message }}
         @enderror
     </div>
+
+    {{-- CATEGORY --}}
+
     <div class="mb-3">
         <label class="form-label" for="category">Choix de la catégorie</label>
         <select class="form-control" id="category" name="category_id">
@@ -40,9 +43,46 @@
         @enderror
     </div>
 
-    <hr>
-    <h2> Liste des ingrédients : </h2>
-    <hr>
+    {{-- INGREDIENT --}}
+
+    <div class="mb-3">
+        <label class="form-label" for="ingredients"> Liste des ingrédients : </label>
+        <table class="table">
+            @foreach ($ingredients as $ingredient)
+                <tr>
+                    <td> <input id="ingredient{{$ingredient->id}}" onClick="check({{$ingredient->id}})" type="checkbox" name="ingredients[]" value="{{$ingredient->id}}"> </td>
+                    <td> {{$ingredient->name}} </td>
+                    <td> <input id="quantity{{$ingredient->id}}" type="text" placeholder="Quantité" name="quantity[]" disabled> </td>
+                    <td> <input id="unit{{$ingredient->id}}" type="text" placeholder="Unité de mesure" name="unit[]" disabled> </td>
+                </tr>
+            @endforeach
+        </table>
+        @error('ingredients')
+            {{ $message }}
+        @enderror
+    </div>
+
+    <script>
+        
+        function check($id){
+            $ingredientCheckBox = document.getElementById("ingredient"+$id);
+            $quantityInput = document.getElementById("quantity"+$id);
+            $unitInput = document.getElementById("unit"+$id)
+
+            if($ingredientCheckBox.checked == true){
+                $quantityInput.disabled = false;
+                $unitInput.disabled = false;
+            }else{
+                $quantityInput.disabled = true;
+                $quantityInput.value = null;
+                $unitInput.disabled = true;
+                $unitInput.value = null;
+            }
+        }
+
+    </script>
+    
+    {{-- IMG --}}
 
     <div class="mb-3">
         <label class="form-label" for="image">Image</label>
@@ -51,6 +91,8 @@
             {{ $message }}
         @enderror
     </div>
+
+    {{-- DAILY RECIPE --}}
 
     <div class="form-check mb-3">
         <label class="form-check-label" for="dayRecipe">Recette du jour</label>
