@@ -10,6 +10,9 @@
         <div class="mb-3">
             <label class="form-label" for="image">Image</label>
             <input type="file" class="form-control" name="image" id="image">
+            @if ($category->image)
+                <img src="{{$category->imageUrl()}}" class="rounded mt-2 bg-primary p-2" style="width: 75px; height: 75px; object-fit: cover;" alt="{{$category->name}}">
+            @endif
             @error('image')
                 {{ $message }}
             @enderror

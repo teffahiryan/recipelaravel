@@ -40,6 +40,13 @@ class IngredientController extends Controller
 
         $ingredient = Ingredient::create($request->validated());
 
+        /** @var UploadedFile|null $img */
+        $img = $request->validated('img');
+        if ($img != null && !$img->getError()){
+            $data['img'] = $img->store('ingredient', 'public');
+            $ingredient->update($data);
+        }
+
         return redirect()->route('ingredient.index')->with('success', "L'ingrédient a été créé avec succès");
 
     }
@@ -56,8 +63,15 @@ class IngredientController extends Controller
 
         $ingredient->update($request->validated());
 
+        /** @var UploadedFile|null $img */
+        $img = $request->validated('img');
+        if ($img != null && !$img->getError()){
+            $data['img'] = $img->store('ingredient', 'public');
+            $ingredient->update($data);
+        }
+
         return redirect()->route('ingredient.show', ['ingredient' => $ingredient->id])->with('success', "L'ingrédient a bien été modifié");
-        
+         
     }
 
     public function delete(Ingredient $ingredient){

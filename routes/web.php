@@ -27,8 +27,8 @@ use App\Http\Controllers\MainController;
             'recipe' => '[0-9]+',
             'slug' => '[a-z0-9\-]+'
         ])->name('show');
-        Route::get('page', 'page')->name('page');
-        Route::get('page/{category}', 'page')->name('page.category');
+        Route::get('page/toutes-les-recettes', 'page')->name('page');
+        Route::get('page/{category}/{categoryname}', 'page')->name('page.category');
     });
 
 

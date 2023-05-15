@@ -100,14 +100,23 @@ class RecipeController extends Controller
  
     public function update(Recipe $recipe, FormRecipeRequest $request){
 
-        $ingredients = [];
+        // $ingredients = [];
 
-        for($i = 0; $i <= count($request->ingredients) - 1 ; $i++){
-            array_push($ingredients, ['ingredient_id' => $request->ingredients[$i], 'quantity' => $request->quantity[$i], 'unit' => $request->unit[$i]]);
-        }
+        // $recipe->update($request->validated());
+
+        // for($i = 0; $i <= count($request->ingredients) - 1 ; $i++){
+        //     array_push($ingredients, ['ingredient_id' => $request->ingredients[$i], 'quantity' => $request->quantity[$i], 'unit' => $request->unit[$i]]);
+        // }
+
+        // $recipe->ingredients()->sync($ingredients);        
 
         $recipe->update($request->validated());
-        $recipe->ingredients()->sync($ingredients);        
+
+        for($i = 0; $i <= count($request->ingredients) - 1 ; $i++){
+            $ingredient_id_array[$request->ingredients[$i]] = ['quantity' => $request->quantity[$i], 'unit' => $request->unit[$i]];
+        }
+
+        $recipe->ingredients()->sync($ingredient_id_array); 
 
         // Ne pas oublier le lien symbolique "php artisan storage:link"
         /** @var UploadedFile|null $image */

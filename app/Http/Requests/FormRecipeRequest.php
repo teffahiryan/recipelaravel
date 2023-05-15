@@ -35,11 +35,10 @@ class FormRecipeRequest extends FormRequest
             // Max 2Mo
             'image' => ['image', 'max:2000'],
             'dayRecipe' => [],
-            'ingredients' => ['required', 'array'],
+            'ingredients' => ['array'],
             'ingredients.quantity' => ['integer'],
-            'ingredients.unit' => ['string']
-            // 'ingredients.quantity' => ['integer'],
-            // 'ingredients.unit' => ['string']
+            'ingredients.unit' => ['string'],
+            'preparationTime' => ['max:10']
         ]; 
     }
 

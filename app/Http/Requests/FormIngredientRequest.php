@@ -23,7 +23,7 @@ class FormIngredientRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:2'],
-            'img' => ['required']
+            'img' => ['image']
         ];
     }
 }

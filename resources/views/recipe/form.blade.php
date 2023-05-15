@@ -3,6 +3,7 @@
 <form action="" method="post" enctype="multipart/form-data">
     {{-- Token laravel à préciser dans tout les formulaires pour le valider et éviter certaines failles --}}
     @csrf
+
     <div class="mb-3">
         <label class="form-label" for="name">Nom de la recette</label>
         {{-- Le old permet en cas d'erreur d'afficher la dernière valeur saisie, 
@@ -13,6 +14,7 @@
             {{ $message }}
         @enderror
     </div>
+
     <div class="mb-3">
         <label class="form-label" for="slug">Slug</label>
         <input type="text" class="form-control" name="slug" value="{{ old('slug', $recipe->slug) }}">
@@ -20,15 +22,28 @@
             {{ $message }}
         @enderror
     </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="preparationTime">Temps de préparation</label>
+        <input type="text" class="form-control" name="preparationTime" value="{{ old('preparationTime', $recipe->preparationTime) }}">
+        @error('preparationTime')
+            {{ $message }}
+        @enderror
+    </div>
+
+    {{-- ETAPES CKEDITOR5 --}}
+
     <div class="mb-3">
         <label class="form-label" for="step">Les étapes de préparation</label>
-        <textarea name="step" class="form-control" >{{ old('step', $recipe->step) }}</textarea>
+        <textarea id="editor" name="step" class="form-control" >{{ old('step', $recipe->step) }}</textarea>
         @error('step')
             {{ $message }}
         @enderror
     </div>
 
     {{-- CATEGORY --}}
+
+    <hr>
 
     <div class="mb-3">
         <label class="form-label" for="category">Choix de la catégorie</label>
@@ -45,19 +60,39 @@
 
     {{-- INGREDIENT --}}
 
+    <hr>
+
     <div class="mb-3">
         <label class="form-label" for="ingredients"> Liste des ingrédients : </label>
         <table class="table">
             @foreach ($ingredients as $ingredient)
-                <tr>
-                    <td> <input id="ingredient{{$ingredient->id}}" onClick="check({{$ingredient->id}})" type="checkbox" name="ingredients[]" value="{{$ingredient->id}}"> </td>
-                    <td> {{$ingredient->name}} </td>
-                    <td> <input id="quantity{{$ingredient->id}}" type="text" placeholder="Quantité" name="quantity[]" disabled> </td>
-                    <td> <input id="unit{{$ingredient->id}}" type="text" placeholder="Unité de mesure" name="unit[]" disabled> </td>
-                </tr>
+                @php
+                    $existIngredient = $recipe->ingredients->where('name', $ingredient->name)->first()
+                @endphp 
+                @if ($existIngredient)
+                    <tr>
+                        <td> <input id="ingredient{{$ingredient->id}}" onClick="check({{$ingredient->id}})" type="checkbox" name="ingredients[]" value="{{$ingredient->id}}" checked> </td>
+                        <td> {{$ingredient->name}} </td>
+                        <td> <input id="quantity{{$ingredient->id}}" type="text" placeholder="Quantité" name="quantity[]" value="{{ old('quantity', $existIngredient->pivot->quantity) }}"> </td>
+                        <td> <input id="unit{{$ingredient->id}}" type="text" placeholder="Unité de mesure" name="unit[]" value="{{ old('unit', $existIngredient->pivot->unit) }}"> </td>
+                    </tr>
+                @else
+                    <tr>
+                        <td> <input id="ingredient{{$ingredient->id}}" onClick="check({{$ingredient->id}})" type="checkbox" name="ingredients[]" value="{{$ingredient->id}}"> </td>
+                        <td> {{$ingredient->name}} </td>
+                        <td> <input id="quantity{{$ingredient->id}}" type="text" placeholder="Quantité" name="quantity[]" disabled> </td>
+                        <td> <input id="unit{{$ingredient->id}}" type="text" value="" placeholder="Unité de mesure" name="unit[]" disabled> </td>
+                    </tr>
+                @endif
             @endforeach
         </table>
         @error('ingredients')
+            {{ $message }}
+        @enderror
+        @error('quantity')
+            {{ $message }}
+        @enderror
+        @error('unit')
             {{ $message }}
         @enderror
     </div>
@@ -84,9 +119,14 @@
     
     {{-- IMG --}}
 
+    <hr>
+
     <div class="mb-3">
         <label class="form-label" for="image">Image</label>
         <input type="file" class="form-control" name="image" id="image">
+        @if ($recipe->image)
+            <img src="{{$recipe->imageUrl()}}" class="rounded mt-2" style="width: 75px; height: 75px; object-fit: cover;" alt="{{$recipe->name}}">
+        @endif
         @error('image')
             {{ $message }}
         @enderror
@@ -94,15 +134,17 @@
 
     {{-- DAILY RECIPE --}}
 
-    <div class="form-check mb-3">
+    <hr>
+    <div class="form-check form-switch mb-3">
+        <input type="hidden" value="0" name="dayRecipe">
+        <input type="checkbox" class="form-check-input" name="dayRecipe" id="dayRecipe" value="1" @checked(old('dayRecipe', $recipe->dayRecipe ?? false)) >
         <label class="form-check-label" for="dayRecipe">Recette du jour</label>
-        <input type="checkbox" class="form-check-input" name="dayRecipe" id="dayRecipe" value="1">
         @error('dayRecipe')
             {{ $message }}
         @enderror
     </div>
 
-    <div class="mt-2">
+    <div class="my-2">
         <button class="btn btn-primary"> 
             {{-- Si la recette contient un ID ça veut dire qu'on modifie sinon on créer --}}
             @if($recipe->id)
@@ -114,3 +156,27 @@
         <a href="{{route('recipe.index')}}" class="btn btn-primary"> Retour </a>
     </div>
 </form>
+
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ), {
+            toolbar: {
+                    items: [
+                        'heading', '|',
+                        'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+                        'bulletedList', 'numberedList', 'todoList', '|',
+                        'outdent', 'indent', '|',
+                        'undo', 'redo',
+                        '-',
+                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+                        'alignment', '|',
+                        'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+                    ],
+                    shouldNotGroupWhenFull: true
+                },
+            language: 'fr'
+        })
+        .catch( error => {
+            console.error( error );
+        } );
+</script>

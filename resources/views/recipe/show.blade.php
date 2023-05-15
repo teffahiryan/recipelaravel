@@ -8,9 +8,10 @@
 
     <h1> {{$recipe->name}} </h1> 
     <div>
-        <p> étapes : {{ $recipe->step }} </p>
         <p> catégorie : {{ $recipe->category->name ?? 'Pas de catégorie' }} </p>
         <p> Plat du jour : {{ $recipe->dayRecipe ?? 'False'}} </p>
+        <p> Temps de préparation : {{ $recipe->preparationTime }} </p>
+        <p> étapes : {!! $recipe->step !!} </p>
         <ul>
             @foreach ($recipe->ingredients as $ingredient)
                 <li> {{$ingredient->name}} | {{$ingredient->pivot->quantity}} {{$ingredient->pivot->unit}} </li>

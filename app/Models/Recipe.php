@@ -16,7 +16,8 @@ class Recipe extends Model
         'step',
         'category_id',
         'image',
-        'dayRecipe'
+        'dayRecipe',
+        'preparationTime'
     ];
 
     // Cette fonction permet de dire que cet article est associé a une catégorie
