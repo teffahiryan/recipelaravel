@@ -15,7 +15,10 @@
                     @if ($recipe->image)
                         <img src="{{$recipe->imageUrl()}}" alt=""> 
                     @endif
-                    <p class="ms-2"> {{$recipe->name}} </p>
+                    <p class="mx-2"> {{$recipe->name}} </p>
+                    @if ($recipe->dayRecipe == 1)
+                        <div class="badge text-bg-success"> Recette du jour </div>
+                    @endif
                 </div>
                 <div class="d-flex gap-2">
                     <a href="{{ route('recipe.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id]) }}" class="btn btn-primary"> Voir </a>

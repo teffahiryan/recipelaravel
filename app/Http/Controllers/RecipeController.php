@@ -57,11 +57,13 @@ class RecipeController extends Controller
         // On créer un nouvel objet RECIPE vide pour ne pas avoir de soucis avec le form.blade.php (valeur par défaut insérer de l'objet recipe en cas de EDIT - voir le fichier)
         $recipe = new Recipe();
         $categories = Category::all();
+        $ingredients = Ingredient::all();
 
         return view('recipe.create', [
             // On lui retourne l'objet vide
             'recipe' => $recipe,
-            'categories' => $categories
+            'categories' => $categories,
+            'ingredients' => $ingredients
         ]);
 
     }
@@ -71,6 +73,14 @@ class RecipeController extends Controller
         
         // On créer et on store cette objet s'il est validé par un fichier Request (app->requets->formreciperequest.php) qui se créer à l'aide de la commande "php artisan make:request NomDeLaRequest"
         $recipe = Recipe::create($request->validated());
+
+        
+        if($request->ingredients != null){
+            for($i = 0; $i <= count($request->ingredients) - 1 ; $i++){
+                $ingredient_id_array[$request->ingredients[$i]] = ['quantity' => $request->quantity[$i], 'unit' => $request->unit[$i]];
+            }
+            $recipe->ingredients()->sync($ingredient_id_array); 
+        }
 
         /** @var UploadedFile|null $image */
         $image = $request->validated('image');
@@ -112,11 +122,12 @@ class RecipeController extends Controller
 
         $recipe->update($request->validated());
 
-        for($i = 0; $i <= count($request->ingredients) - 1 ; $i++){
-            $ingredient_id_array[$request->ingredients[$i]] = ['quantity' => $request->quantity[$i], 'unit' => $request->unit[$i]];
+        if($request->ingredients != null){
+            for($i = 0; $i <= count($request->ingredients) - 1 ; $i++){
+                $ingredient_id_array[$request->ingredients[$i]] = ['quantity' => $request->quantity[$i], 'unit' => $request->unit[$i]];
+            }
+            $recipe->ingredients()->sync($ingredient_id_array); 
         }
-
-        $recipe->ingredients()->sync($ingredient_id_array); 
 
         // Ne pas oublier le lien symbolique "php artisan storage:link"
         /** @var UploadedFile|null $image */

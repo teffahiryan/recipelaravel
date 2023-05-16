@@ -1,5 +1,7 @@
 @extends('base')
 
+@section('title', 'Liste des catégories | RecipeRT')
+
 @section('content')
 
     <h1> Liste des catégories </h1>

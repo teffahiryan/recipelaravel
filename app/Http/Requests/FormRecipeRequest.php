@@ -34,11 +34,11 @@ class FormRecipeRequest extends FormRequest
             'category_id' => ['required', 'exists:categories,id'],
             // Max 2Mo
             'image' => ['image', 'max:2000'],
-            'dayRecipe' => [],
+            'dayRecipe' => [Rule::unique('recipes')->where('dayRecipe', '1')],
             'ingredients' => ['array'],
             'ingredients.quantity' => ['integer'],
             'ingredients.unit' => ['string'],
-            'preparationTime' => ['max:10']
+            'preparationTime' => ['required', 'max:10']
         ]; 
     }
 

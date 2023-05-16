@@ -1,5 +1,7 @@
 @extends('base')
 
+@section('title', 'Connexion | RecipeRT')
+
 @section('content')
     
     <h1> Se connecter </h1>

@@ -1,5 +1,7 @@
 @extends('base')
 
+@section('title', 'Voir un ingrédient | RecipeRT')
+
 @section('title')
     Catégorie : {{$category->name}}
 @endsection

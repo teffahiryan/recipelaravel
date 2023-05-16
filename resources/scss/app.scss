@@ -1,16 +1,6 @@
-// required to get $orange variable
-@import "bootstrap/scss/_functions"; 
-@import "bootstrap/scss/_variables";
+$primary : #7e97af;
 
-$primary: $orange; // set the $primary variable
-
-// merge with existing $theme-colors map
-$theme-colors: map-merge($theme-colors, (
-  "primary": $primary
-));
-
-// set changes
-@import "bootstrap";
+@import "/node_modules/bootstrap/scss/bootstrap";
 
 .list-group img{
   width: 50px;

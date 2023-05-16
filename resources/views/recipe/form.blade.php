@@ -84,17 +84,17 @@
                         <td> <input id="unit{{$ingredient->id}}" type="text" value="" placeholder="Unité de mesure" name="unit[]" disabled> </td>
                     </tr>
                 @endif
+                @error('ingredients')
+                {{ $message }}
+                @enderror
+                @error('quantity')
+                    {{ $message }}
+                @enderror
+                @error('unit')
+                    {{ $message }}
+                @enderror
             @endforeach
         </table>
-        @error('ingredients')
-            {{ $message }}
-        @enderror
-        @error('quantity')
-            {{ $message }}
-        @enderror
-        @error('unit')
-            {{ $message }}
-        @enderror
     </div>
 
     <script>
