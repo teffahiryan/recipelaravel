@@ -67,14 +67,16 @@
         <table class="table">
             @foreach ($ingredients as $ingredient)
                 @php
-                    $existIngredient = $recipe->ingredients->where('name', $ingredient->name)->first()
+                    $existIngredient = $recipe->ingredients->where('name', $ingredient->name)->first();
                 @endphp 
                 @if ($existIngredient)
+                    {{logger('test')}}
                     <tr>
                         <td> <input id="ingredient{{$ingredient->id}}" onClick="check({{$ingredient->id}})" type="checkbox" name="ingredients[]" value="{{$ingredient->id}}" checked> </td>
                         <td> {{$ingredient->name}} </td>
-                        <td> <input id="quantity{{$ingredient->id}}" type="text" placeholder="Quantité" name="quantity[]" value="{{ old('quantity', $existIngredient->pivot->quantity) }}"> </td>
-                        <td> <input id="unit{{$ingredient->id}}" type="text" placeholder="Unité de mesure" name="unit[]" value="{{ old('unit', $existIngredient->pivot->unit) }}"> </td>
+
+                        <td> <input id="quantity{{$ingredient->id}}" type="text" placeholder="Quantité" name="quantity[]" value="{{ $existIngredient->pivot->quantity }}"> </td>
+                        <td> <input id="unit{{$ingredient->id}}" type="text" placeholder="Unité de mesure" name="unit[]" value="{{ $existIngredient->pivot->unit }}"> </td>
                     </tr>
                 @else
                     <tr>

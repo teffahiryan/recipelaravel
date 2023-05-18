@@ -126,6 +126,7 @@ class RecipeController extends Controller
             for($i = 0; $i <= count($request->ingredients) - 1 ; $i++){
                 $ingredient_id_array[$request->ingredients[$i]] = ['quantity' => $request->quantity[$i], 'unit' => $request->unit[$i]];
             }
+
             $recipe->ingredients()->sync($ingredient_id_array); 
         }
 

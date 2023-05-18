@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Recipe;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -34,7 +35,7 @@ class FormRecipeRequest extends FormRequest
             'category_id' => ['required', 'exists:categories,id'],
             // Max 2Mo
             'image' => ['image', 'max:2000'],
-            'dayRecipe' => [Rule::unique('recipes')->where('dayRecipe', '1')],
+            'dayRecipe' => [''],
             'ingredients' => ['array'],
             'ingredients.quantity' => ['integer'],
             'ingredients.unit' => ['string'],

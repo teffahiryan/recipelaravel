@@ -40,7 +40,7 @@
 
     @if ($recipes->isEmpty())
         <div class="card bg-secondary p-2 w-75 mx-auto">
-            <p class="card-text text-bg-secondary text-center"> Aucune recettes trouvé </p>
+            <p class="card-text text-bg-secondary text-center"> Aucune recette trouvé </p>
         </div>
     @endif
 
