@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\Recipe;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FormRecipeRequest extends FormRequest
@@ -35,7 +36,7 @@ class FormRecipeRequest extends FormRequest
             'category_id' => ['required', 'exists:categories,id'],
             // Max 2Mo
             'image' => ['image', 'max:2000'],
-            'dayRecipe' => [''],
+            'dayRecipe' => [ 'required', 'boolean'],
             'ingredients' => ['array'],
             'ingredients.quantity' => ['integer'],
             'ingredients.unit' => ['string'],

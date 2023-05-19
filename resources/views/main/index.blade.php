@@ -14,12 +14,6 @@
         </div>
     @endif
 
-    @php
-        $test['5'] = ['quantity' => 5, 'unit' => 2];
-
-        echo $test;
-    @endphp
-
     <div class="container w-50 d-flex flex-column justify-content-center">
         <div class="row">
             @foreach ($categories as $category)
