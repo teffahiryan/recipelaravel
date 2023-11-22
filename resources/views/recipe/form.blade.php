@@ -147,7 +147,7 @@
     </div>
 
     <div class="my-2">
-        <button class="btn btn-primary"> 
+        <button class="btn btn-primary text-white"> 
             {{-- Si la recette contient un ID ça veut dire qu'on modifie sinon on créer --}}
             @if($recipe->id)
                 Modifier
@@ -155,7 +155,7 @@
                 Créer
             @endif
         </button>
-        <a href="{{route('recipe.index')}}" class="btn btn-primary"> Retour </a>
+        <a href="{{route('recipe.index')}}" class="btn btn-primary text-white"> Retour </a>
     </div>
 </form>
 

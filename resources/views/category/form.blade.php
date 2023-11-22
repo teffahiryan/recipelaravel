@@ -20,7 +20,7 @@
     </div>
 
     <div class="mt-2">
-        <button class="btn btn-primary"> 
+        <button class="btn btn-primary text-white"> 
             {{-- Si la catégorie contient un ID ça veut dire qu'on modifie sinon on créer --}}
             @if($category->id)
                 Modifier
@@ -28,6 +28,6 @@
                 Créer
             @endif
         </button>
-        <a href="{{route('category.index')}}" class="btn btn-primary"> Retour </a>
+        <a href="{{route('category.index')}}" class="btn btn-primary text-white"> Retour </a>
     </div>
 </form>

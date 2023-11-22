@@ -31,7 +31,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{$recipe->name}}</h5>
                         <p class="card-text"> {{$recipe->category->name ?? 'Pas de catégorie'}} </p>
-                        <a href="{{route('main.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id])}}" class="card-button btn btn-primary mt-2"> Accéder à la recette </a>
+                        <a href="{{route('main.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id])}}" class="card-button btn btn-primary mt-2 text-white"> Accéder à la recette </a>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
 
     @if ($recipes->isEmpty())
         <div class="card bg-secondary p-2 w-75 mx-auto">
-            <p class="card-text text-bg-secondary text-center"> Aucune recette trouvé </p>
+            <p class="card-text text-bg-secondary text-center"> Aucune recette trouvée </p>
         </div>
     @endif
 

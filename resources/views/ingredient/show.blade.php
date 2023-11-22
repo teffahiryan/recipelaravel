@@ -9,6 +9,6 @@
     <h1> {{$ingredient->name}} </h1> 
     <p> {{ $ingredient->img }} </p>
 
-    <a href="{{route('ingredient.index')}}" class="btn btn-primary mt-2"> Retour à la liste </a>
+    <a href="{{route('ingredient.index')}}" class="btn btn-primary mt-2 text-white"> Retour à la liste </a>
 
 @endsection

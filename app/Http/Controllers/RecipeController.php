@@ -74,7 +74,6 @@ class RecipeController extends Controller
         // On créer et on store cette objet s'il est validé par un fichier Request (app->requets->formreciperequest.php) qui se créer à l'aide de la commande "php artisan make:request NomDeLaRequest"
         $recipe = Recipe::create($request->validated());
 
-        
         if($request->ingredients != null){
             for($i = 0; $i <= count($request->ingredients) - 1 ; $i++){
                 $ingredient_id_array[$request->ingredients[$i]] = ['quantity' => $request->quantity[$i], 'unit' => $request->unit[$i]];

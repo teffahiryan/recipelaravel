@@ -10,6 +10,6 @@
 
     <h1> {{$category->name}} </h1> 
 
-    <a href="{{route('category.index')}}" class="btn btn-primary mt-2"> Retour à la liste </a>
+    <a href="{{route('category.index')}}" class="btn btn-primary mt-2 text-white"> Retour à la liste </a>
 
 @endsection

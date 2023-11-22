@@ -6,7 +6,7 @@
 
     <h1> Liste des recettes </h1>
 
-    <a href="{{route('recipe.create')}}" class="btn btn-primary mb-2"> Créer </a>
+    <a href="{{route('recipe.create')}}" class="btn btn-primary mb-2 text-white"> Créer </a>
 
     <ul class="list-group">
         @foreach ($recipes as $recipe)
@@ -21,8 +21,8 @@
                     @endif
                 </div>
                 <div class="d-flex gap-2">
-                    <a href="{{ route('recipe.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id]) }}" class="btn btn-primary"> Voir </a>
-                    <a href="{{ route('recipe.edit', ['recipe' => $recipe->id]) }}" class="btn btn-primary"> Modifier </a>
+                    <a href="{{ route('recipe.show', ['slug' => $recipe->slug, 'recipe' => $recipe->id]) }}" class="btn btn-primary text-white"> Voir </a>
+                    <a href="{{ route('recipe.edit', ['recipe' => $recipe->id]) }}" class="btn btn-primary text-white"> Modifier </a>
                     <form action="{{route('recipe.delete', ['recipe' => $recipe])}}" method="post">
                         @csrf
                         @method("delete")

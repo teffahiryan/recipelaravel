@@ -9,7 +9,7 @@
         <section class="d-flex flex-column justify-content-center align-items-center mb-5">
             <h1> {{$recipe->name}} </h1>
             <img class="img-fluid rounded w-25" src="{{$recipe->imageUrl()}}" alt="{{$recipe->name}}">
-            <p class="badge text-bg-primary p-2"> <i class="fas fa-hourglass-half"></i> Temps de préparation : {{$recipe->preparationTime}} </p>
+            <p class="badge text-bg-primary p-2 text-white"> <i class="fas fa-hourglass-half text-white"></i> Temps de préparation : {{$recipe->preparationTime}} </p>
         </section>
 
         <hr class="w-50 mx-auto">

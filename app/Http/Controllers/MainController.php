@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Recipe;
 use App\Models\Category;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 
 class MainController extends Controller
@@ -16,10 +18,19 @@ class MainController extends Controller
 
         $dayRecipe = Recipe::where('dayRecipe', '1')->first();
 
+        // User::create([
+        //     'name' => 'Ryan',
+        //     'email' => 'teffahi.ryan@gmail.com',
+        //     'role' => 'admin',
+        //     'password' => Hash::make('0000')
+        // ]);
+
         return view('main.index', [
             'categories' => $categories,
             'dayRecipe' => $dayRecipe
         ]);
+
+
 
     }
 

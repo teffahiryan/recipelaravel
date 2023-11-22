@@ -26,7 +26,7 @@
                     @enderror
                 </div>
 
-                <button class="btn btn-primary mt-3">Se connecter</button>
+                <button class="btn btn-primary mt-3 text-white">Se connecter</button>
 
             </form>
         </div>

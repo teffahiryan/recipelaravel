@@ -6,7 +6,7 @@
 
     <h1> Liste des catégories </h1>
 
-    <a href="{{route('category.create')}}" class="btn btn-primary mb-2"> Créer </a>
+    <a href="{{route('category.create')}}" class="btn btn-primary mb-2 text-white"> Créer </a>
 
     <ul class="list-group"> 
         @foreach ($categories as $category)
@@ -20,8 +20,8 @@
                     <p class="ms-2"> {{$category->name}} </p>
                 </div>
                 <div class="d-flex gap-2">
-                    <a href="{{route('category.show', ['category' => $category->id])}}" class="btn btn-primary"> Voir </a>
-                    <a href="{{route('category.edit', ['category' => $category->id])}}" class="btn btn-primary"> Modifier </a>
+                    <a href="{{route('category.show', ['category' => $category->id])}}" class="btn btn-primary text-white"> Voir </a>
+                    <a href="{{route('category.edit', ['category' => $category->id])}}" class="btn btn-primary text-white"> Modifier </a>
                     <form action="{{route('category.delete', ['category' => $category])}}" method="post">
                         @csrf
                         @method("delete")
